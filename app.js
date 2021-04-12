@@ -90,18 +90,21 @@ function handleUserClick(event){
         }
         renderThreeImages();        
     }else{
-        let list=document.getElementById('results-list');
-        let btn =document.createElement('button');
-        btn.innerHTML="";
-        // mallResult.addEventListener('click',handleUserClick);
-        document.body.appendChild(btn);
-        for (let i = 0; i < Mall.allProducts.length; i++) {
-            let mallResult=document.createElement('li'); 
-            list.appendChild(mallResult);
-            mallResult.textContent=`${Mall.allProducts[i].name} 
-            has ${ Mall.allProducts[i].votes} votes with ${Mall.allProducts[i].shown}shows`
+        let resultButton=document.getElementById('Results-Button');
+        resultButton.addEventListener('click', handleList);
+        function handleList (){
+            let list=document.getElementById('results-list');
+            let btn =document.createElement('button');
+            btn.innerHTML="";
+            document.body.appendChild(btn);
+            for (let i = 0; i < Mall.allProducts.length; i++) {
+                let mallResult=document.createElement('li'); 
+                list.appendChild(mallResult);
+                mallResult.textContent=`${Mall.allProducts[i].name} 
+                has ${ Mall.allProducts[i].votes} votes with ${Mall.allProducts[i].shown}shows`
+            }
+            resultButton.removeEventListener('click',handleList);
         }
         imagesElement.removeEventListener('click',handleUserClick);
-        // botton.removeEventListener('click',handleUserClick);
     }
 }
