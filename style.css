@@ -1,0 +1,45 @@
+* {
+    font-family: Arial, sans-serif; 
+  }
+
+h1{
+    background-color: #b6b6b6;
+    font-size: larger;
+    text-align: center;
+    height: 49px;
+    font-family: cursive;
+}
+p{
+    text-align: center;
+    background-color: lightgrey;
+    font-size: large;
+    font-family: cursive;
+    transition-property: width;
+    transition-duration: 5s;
+}
+.p:hover{
+    width: 100%;
+    background-color: dimgrey;
+}
+#Results-Button{
+    color: rgb(0, 0, 0);
+    text-align: center;
+    width: 121px;
+    height: 51px;
+    font-size: larger;
+    font-family: cursive;
+}
+#images{
+       background-color: lightgray;
+       padding: 68px;
+       margin-inline: 417px;
+}
+#results-list{
+    background-color: lightcyan;
+    text-decoration-color: darkgreen;
+    text-decoration-line: overline;
+}
+#Results-Button:hover{
+    background-color: #424242;
+    color: white;
+}

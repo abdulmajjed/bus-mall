@@ -5,25 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <header> 
+        <h1>  Bus-Mall site</h1>
     </header>
-    <main>
-    <p>
-        Welcome our Bus-Mall site, please choose one of below...
+    <p class="p">
+        please choose one of below...
     </p>
+    <main>
     <div id="images">
-        <img id="left-image" src="" alt="">
-        <img id="middle-image" src="" alt="">
-        <img id="right-image" src="" alt="">
+        <img id="left-image" src="" alt="" width="300px" height="300px">
+        <img id="middle-image" src="" alt=""  width="300px" height="300px">
+        <img id="right-image" src="" alt=""  width="300px" height="300px">
     </div>
-    <button id="Results-Button">results-list</button>
+    <fieldset>
+    <button id="Results-Button">Voting-List</button>
     <ul id="results-list" >
     </ul>
+</fieldset>
 </main>
 <footer>
+    <div>
+        <canvas id="myChart"></canvas>
+      </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
