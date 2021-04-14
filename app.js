@@ -15,8 +15,8 @@ let rightImageIndex;
 let namesArr = [];
 let votesArr = [];
 let shownArr = [];
-
 let imgArr =[];
+
 // constructer function
 function Mall(name, source) {
     this.name = name;
@@ -25,8 +25,23 @@ function Mall(name, source) {
     this.shown = 0;
     Mall.allProducts.push(this);
     namesArr.push(this.name);
+   
 }
 Mall.allProducts = [];
+
+// set the global array to empty
+Mall.prototype.products=function(){
+    console.log(products);
+}
+function updateStorage(){
+    console.log(JSON);
+
+    let arrayString=JSON.stringify(Mall.allProducts);
+    localStorage.setItem('products',arrayString);
+    console.log(Mall.allProducts); //
+    console.log(arrayString); //    
+}
+
 // instancess //adding all product imgs
 new Mall('bag', 'images/bag.jpg');
 new Mall('banana', 'images/banana.jpg');
@@ -53,6 +68,7 @@ new Mall('wine-glass', 'images/wine-glass.jpg');
 function generateRandomIndex() {
     return Math.floor(Math.random() * Mall.allProducts.length);
 }
+
 //function for three imgs
 function renderThreeImages() {
     leftImageIndex = generateRandomIndex();
@@ -63,7 +79,6 @@ function renderThreeImages() {
         middleImageIndex = generateRandomIndex();
         rightImageIndex = generateRandomIndex();
     }
-
   imgArr=[leftImageIndex,middleImageIndex,rightImageIndex];
     leftImageElement.src = Mall.allProducts[leftImageIndex].source;
     middleImageElement.src = Mall.allProducts[middleImageIndex].source;
@@ -71,14 +86,31 @@ function renderThreeImages() {
 
     Mall.allProducts[leftImageIndex].shown++;
     Mall.allProducts[middleImageIndex].shown++;
-    Mall.allProducts[rightImageIndex].shown++;
+    Mall.allProducts[rightImageIndex].shown++;  
+   
 }
-renderThreeImages();
+
+// renderThreeImages();
+
+// function for getVotingShow
+function getVotingShow(){
+    let data = localStorage.getItem('votes','shown');
+    // let data =localStorage.getItem('shown');
+    console.log(data);
+    let votShowData = JSON.parse(data);
+    
+    if(votShowData !==null) {
+        Mall.allProducts=votShowData;
+        console.log(votShowData);  
+    }  
+  
+}
 
 // handle clicking
 imagesElement.addEventListener('click', handleUserClick);
 function handleUserClick(event) {
     userAttempsCounter++;
+   
     if (userAttempsCounter <= maxAttempts) {
         if (event.target.id === 'left-image') {
             Mall.allProducts[leftImageIndex].votes++;
@@ -90,8 +122,10 @@ function handleUserClick(event) {
             alert('please click on the images');
             userAttemptsCounter--;
         }
-        renderThreeImages();
+        renderThreeImages(); 
+         updateStorage();
     } else {
+       
         let resultButton = document.getElementById('Results-Button');
         resultButton.addEventListener('click', handleList);
         function handleList() {
@@ -106,18 +140,25 @@ function handleUserClick(event) {
                 has ${Mall.allProducts[i].votes} votes with ${Mall.allProducts[i].shown}shows`
                 votesArr.push(Mall.allProducts[i].votes);
                 shownArr.push(Mall.allProducts[i].shown);
+                mallResult.appendChild(myChart);
                 console.log('hi from console ',Mall.allProducts[i].shown);
-            }
+              
+        }
+            
             resultButton.removeEventListener('click', handleList);
             chart();
             resultButton.hidden=false;
+            updateStorage();
+
         }
-        imagesElement.removeEventListener('click', handleUserClick);
         
-    }
-}
-
-
+        imagesElement.removeEventListener('click', handleUserClick);
+       
+    } 
+  
+} 
+renderThreeImages();
+// getVotingShow();
 // chart.js
 function chart() {
     let ctx = document.getElementById('myChart').getContext('2d');
@@ -151,3 +192,6 @@ function chart() {
 }
 console.log(votesArr);
 console.log(namesArr);
+getVotingShow();
+
+
