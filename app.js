@@ -5,7 +5,7 @@ let leftImageElement = document.getElementById('left-image');
 let middleImageElement = document.getElementById('middle-image');
 let rightImageElement = document.getElementById('right-image');
 
-let maxAttempts = 5;
+let maxAttempts = 25;
 let userAttempsCounter = 0;
 
 let leftImageIndex;
@@ -16,7 +16,7 @@ let namesArr = [];
 let votesArr = [];
 let shownArr = [];
 
-// let imgArr =[];
+let imgArr =[];
 // constructer function
 function Mall(name, source) {
     this.name = name;
@@ -58,13 +58,13 @@ function renderThreeImages() {
     leftImageIndex = generateRandomIndex();
     middleImageIndex = generateRandomIndex();
     rightImageIndex = generateRandomIndex();
-    while (leftImageIndex === rightImageIndex || middleImageIndex === rightImageIndex || leftImageIndex === middleImageIndex){
+    while (leftImageIndex === rightImageIndex || middleImageIndex === rightImageIndex || leftImageIndex === middleImageIndex || imgArr.includes(leftImageIndex) || imgArr.includes(middleImageIndex)|| imgArr.includes(rightImageIndex)){
         leftImageIndex = generateRandomIndex();
         middleImageIndex = generateRandomIndex();
         rightImageIndex = generateRandomIndex();
     }
 
-    // Mall.imgArr.push(leftImageIndex,middleImageIndex,rightImageIndex);
+  imgArr=[leftImageIndex,middleImageIndex,rightImageIndex];
     leftImageElement.src = Mall.allProducts[leftImageIndex].source;
     middleImageElement.src = Mall.allProducts[middleImageIndex].source;
     rightImageElement.src = Mall.allProducts[rightImageIndex].source;
